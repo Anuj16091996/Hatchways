@@ -13,17 +13,17 @@
 
 ::-webkit-scrollbar {
     width: 8px;  
-    height: 8px;
+ 
 }
 /* ::-webkit-scrollbar-button {
     background: rgb(8, 3, 3)
 } */
-::-webkit-scrollbar-track-piece {
-    background: rgb(228, 228, 228)
+/* ::-webkit-scrollbar-track-piece {
+    background: rgb(244 244 244)
 }
 ::-webkit-scrollbar-thumb {
     background: rgb(2, 0, 0)
-}
+} */
 
 @media only screen and (max-width: 389px) {
     .contentTable {

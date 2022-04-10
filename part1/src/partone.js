@@ -39,7 +39,8 @@ class partone extends React.Component {
             <tr>
               <b>{data.firstName + " " + data.lastName}</b>
             </tr>
-            <tr>{data.email}</tr>
+            <tr>Email :{data.email}</tr>
+            <tr>Company :{data.company}</tr>
             <tr>Skill :{data.skill}</tr>
 
             <tr>

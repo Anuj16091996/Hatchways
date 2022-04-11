@@ -1,11 +1,15 @@
 import React from "react";
-import "./partFour.css";
+import "./partFive.css";
 
-class partFour extends React.Component {
+class partFive extends React.Component {
   constructor() {
     super();
     this.state = {
-      hatchwayAPI: { dataLoaded: true, studentDetails: [], searchDetails: [] },
+      hatchwayAPI: {
+        dataLoaded: true,
+        studentDetails: [],
+        searchDetails: [],
+      },
     };
   }
   componentDidMount() {
@@ -14,8 +18,15 @@ class partFour extends React.Component {
       if (response.ok) {
         response.json().then((json_response) => {
           statusCopy.hatchwayAPI.studentDetails = json_response.students;
+          const finaldata = statusCopy.hatchwayAPI.studentDetails.map(
+            (data) => {
+              data["tag"] = [];
+              return data;
+            }
+          );
+
           statusCopy.hatchwayAPI.searchDetails = json_response.students;
-          this.setState(statusCopy);
+          this.setState(finaldata);
         });
       } else {
         statusCopy.hatchwayAPI.dataLoaded = false;
@@ -40,6 +51,34 @@ class partFour extends React.Component {
           return filterData;
         });
       statusCopy.hatchwayAPI.searchDetails = finaldata;
+    } else {
+      statusCopy.hatchwayAPI.searchDetails =
+        statusCopy.hatchwayAPI.studentDetails;
+    }
+
+    this.setState(statusCopy);
+  };
+
+  getUserTag = (event) => {
+    const userInput = event.target.value;
+    let statusCopy = Object.assign({}, this.state);
+
+    if (userInput !== "") {
+      const finalObject = [];
+      statusCopy.hatchwayAPI.studentDetails.forEach((Objects) => {
+        if (Objects.tag.length > 0) {
+          Objects.tag.forEach((filter) => {
+            if (filter.toLowerCase().includes(userInput.toLowerCase())) {
+              finalObject.push(Objects);
+            }
+          });
+        }
+      });
+
+      statusCopy.hatchwayAPI.searchDetails = finalObject;
+    } else {
+      statusCopy.hatchwayAPI.searchDetails =
+        statusCopy.hatchwayAPI.studentDetails;
     }
 
     this.setState(statusCopy);
@@ -58,6 +97,16 @@ class partFour extends React.Component {
       pannel[index].style.overflow = "hidden";
       pannel[index].style.maxHeight = null;
     }
+  };
+
+  addTagToUser = (event, index) => {
+    const userInput = event.target.value;
+    document.getElementById(index).value = "";
+    let statusCopy = Object.assign({}, this.state);
+    if (userInput !== "") {
+      statusCopy.hatchwayAPI.studentDetails[index]["tag"].push(userInput);
+    }
+    this.setState(statusCopy);
   };
 
   render() {
@@ -115,6 +164,29 @@ class partFour extends React.Component {
                         })}
                       </div>
                     </tr>
+
+                    <tr>
+                      <tr>
+                        {data.tag.map((data) => {
+                          return (
+                            <td>
+                              <button className="tagbutton">{data}</button>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                      <input
+                        id={index}
+                        className="inputborder"
+                        type="text"
+                        placeholder="Add a tag"
+                        onKeyPress={(event) => {
+                          if (event.key === "Enter") {
+                            this.addTagToUser(event, index);
+                          }
+                        }}
+                      />
+                    </tr>
                   </div>
                 </td>
               </tr>
@@ -139,6 +211,14 @@ class partFour extends React.Component {
                   />
                 </div>
               </div>
+              <div className="inputborder">
+                <div className="inputtable">
+                  <input
+                    onChange={(Event) => this.getUserTag(Event)}
+                    placeholder="Search By Tag"
+                  />
+                </div>
+              </div>
               <div className="scrollobject">
                 <div>{studentDetailsArray}</div>
               </div>
@@ -150,4 +230,4 @@ class partFour extends React.Component {
   }
 }
 
-export default partFour;
+export default partFive;

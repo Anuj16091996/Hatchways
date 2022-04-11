@@ -64,7 +64,7 @@ class partFive extends React.Component {
     let statusCopy = Object.assign({}, this.state);
 
     if (userInput !== "") {
-      const finalObject = [];
+      var finalObject = [];
       statusCopy.hatchwayAPI.studentDetails.forEach((Objects) => {
         if (Objects.tag.length > 0) {
           Objects.tag.forEach((filter) => {
@@ -74,6 +74,10 @@ class partFive extends React.Component {
           });
         }
       });
+      finalObject = finalObject.filter(
+        (ele, ind) =>
+          ind === finalObject.findIndex((elem) => elem.id === ele.id)
+      );
 
       statusCopy.hatchwayAPI.searchDetails = finalObject;
     } else {

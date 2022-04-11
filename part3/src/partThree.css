@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+*{
+    font-family: 'Raleway';
+    margin: 0px;
+    padding: 0px;
+    color: #6b6969;
+    scrollbar-width: thin;
+}
+
+.body{
+    background-color: rgb(244 244 244)
+}
+
+::-webkit-scrollbar {
+    width: 8px;  
+ 
+}
+input{
+    cursor: pointer;
+    width: 16cm;
+    padding: 8px;
+}
+
+input, input:focus, textarea:focus, select:focus{
+    outline: none;
+    border: 0px;
+}
+.inputtable{
+   
+    position: fixed;
+    display: contents;
+}
+
+.inputborder{
+    border: 0px;
+    padding: 13px 0px 10px 0px;
+    border-bottom: 1px solid black;
+}
+
+/* ::-webkit-scrollbar-button {
+    background: rgb(8, 3, 3)
+} */
+/* ::-webkit-scrollbar-track-piece {
+    background: rgb(244 244 244)
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(2, 0, 0)
+} */
+
+@media only screen and (max-width: 389px) {
+    .contentTable {
+        border-bottom: 1px #f2ecec solid;
+        width: 10cm;
+    }
+    body {
+        width: fit-content;
+        background-color: rgb(244 244 244)
+    }
+  }
+
+h1{
+    margin-bottom: 10px;
+    font-weight: 900;
+    color: black;
+    text-transform: uppercase;
+}
+.centrecontent{
+    min-height: 100vh; 
+    display: flex;
+
+    align-items: center;
+    
+}
+.contentTable{
+   border-bottom:1px #f2ecec solid;
+}
+img {
+    border-radius: 50%;
+    border: 1px solid #d1d1d1;
+    margin: 0px 25px 0px 10px;
+    height: 3cm;
+    width: 3cm;
+  }
+
+  .Align_Image{
+vertical-align: middle;
+  }
+
+  .Align_Content{
+    margin:0px 0px 10px 14px
+  }
+.contentData{
+    margin:10px 0px 12px 18px
+}
+.container{
+    margin: 0% auto;
+    background-color: white;
+    width: 17cm;
+    border-radius: 5px;
+}
+
+.scrollobject{
+    height: 14cm;
+    overflow: hidden;
+    overflow-y: scroll;
+}

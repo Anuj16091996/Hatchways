@@ -47,7 +47,7 @@ class partFive extends React.Component {
               .includes(userInput.toLowerCase()) ||
             arrayValues.lastName.toLowerCase().includes(userInput.toLowerCase())
         )
-        .map((filterData, index) => {
+        .map((filterData) => {
           return filterData;
         });
       statusCopy.hatchwayAPI.searchDetails = finaldata;
@@ -154,10 +154,10 @@ class partFive extends React.Component {
                         data.grades.length}
                     </tr>
                     <tr>
-                      <div class="panel">
+                      <div className="panel">
                         {data.grades.map((data, index) => {
                           return (
-                            <div>
+                            <div key={index}>
                               <tr>
                                 <pre>
                                   Test{index + 1} {"        "} {data}
@@ -171,9 +171,9 @@ class partFive extends React.Component {
 
                     <tr>
                       <tr>
-                        {data.tag.map((data) => {
+                        {data.tag.map((data, id) => {
                           return (
-                            <td>
+                            <td key={id}>
                               <button className="tagbutton">{data}</button>
                             </td>
                           );

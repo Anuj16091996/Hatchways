@@ -23,6 +23,10 @@ class parttwo extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    console.log("in");
+  }
+
   render() {
     console.log(this.state.hatchwayAPI.studentDetails);
     let studentDetailsArray = this.state.hatchwayAPI.studentDetails.map(

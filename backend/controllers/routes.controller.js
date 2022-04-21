@@ -1,9 +1,12 @@
 const axios = require("axios");
+const client = require("../config/redis.config");
+const manipulateData = require("./dataManipulation");
 
 exports.routeOne = (req, res) => {
   axios
     .get("https://api.hatchways.io/assessment/blog/posts?tag=tech")
     .then((response) => {
+      client.setEx("ping", 3600, response.data.posts);
       res.status(200).json({
         status: true,
         posts: response.data.posts,
@@ -30,10 +33,10 @@ exports.routeTwo = (req, res) => {
         .then((response) => {
           filterResponse.push(response.data.posts);
           if (pos == tag.length - 1) {
-            const JSONfilter = validateJSON(
+            const JSONfilter = manipulateData.validateJSON(
               filterResponse,
-              sortBy,
-              direction,
+              sortBy.toLowerCase(),
+              direction.toLowerCase(),
               tag
             );
             if (JSONfilter.post.length != 0) {
@@ -53,49 +56,3 @@ exports.routeTwo = (req, res) => {
     }
   }
 };
-
-function validateJSON(Resposne, sortBy, direction, tag) {
-  const finalJSON = {
-    status: false,
-    message: "",
-    post: [],
-  };
-  let conditionone = false;
-  let conditiontwo = false;
-  const sortByAllAcceptance = ["id", "reads", "likes", "popularity"];
-  const directionAllAcceptance = ["desc", "asc"];
-  conditionone = sortByAllAcceptance.includes(sortBy.toLowerCase());
-  conditiontwo = directionAllAcceptance.includes(direction.toLowerCase());
-
-  if (!conditionone) {
-    finalJSON.message = "sortBy parameter is invalid";
-    return finalJSON;
-  } else if (!conditiontwo) {
-    finalJSON.message = "direction parameter is invalid";
-    return finalJSON;
-  }
-
-  Resposne[0].map((values) => {
-    let bool = tag.every((result) => values.tags.includes(result));
-    if (bool) finalJSON.post.push(values);
-  });
-  if (finalJSON.post.length != 0) {
-    const sortdata = sortJSON(finalJSON, sortBy, direction);
-    finalJSON.post = sortdata;
-    return finalJSON;
-  } else {
-    finalJSON.message = "Tags parameter is required";
-    return finalJSON;
-  }
-}
-
-function sortJSON(object, sortBy, direction) {
-  object.post.sort((a, b) => {
-    if (direction == "asc") {
-      return a[sortBy] - b[sortBy];
-    } else {
-      return b[sortBy] - a[sortBy];
-    }
-  });
-  return object.post;
-}

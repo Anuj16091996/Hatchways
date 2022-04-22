@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const PORT = 3001;
 const RouteController = require("./controllers/routes.controller");
-const middleWare = require("./middleware/route");
 const request = require("supertest");
 const bodyParser = require("body-parser");
 const app = express();
@@ -17,6 +16,7 @@ app.get("/", (req, res) => {
 //Can you please tell me in my review that when i call the middleware function it hangs my api call
 //It stuck after client.get() method in middleware route
 //I even ask the question on stack overlfow, but there was no proper response.
+// const middleWare = require("./middleware/route");
 // app.get("/api/ping", middleWare.cacheRouteOne, RouteController.routeOne);
 
 app.get("/api/ping", RouteController.routeOne);

@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-unused-vars */
+import "./App.css";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+// import incer from "./reducers/index";
+import { actions } from "./reducers/index";
 
 function App() {
+  const counter = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+  const Increment = () => {
+    dispatch(actions.incer());
+  };
+  const Decrement = () => {
+    dispatch(actions.decrement(10));
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>counter</h1>
+      <h1>{counter}</h1>
+      <h3></h3>
+
+      <button onClick={() => Increment()}>Increment</button>
+      <button onClick={() => Decrement()}>Decrement</button>
     </div>
   );
 }
 
 export default App;
+
+// console.log(actions.getState.toString);

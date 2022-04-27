@@ -1,12 +1,41 @@
 /* eslint-disable no-unused-vars */
 export function studentData(state, action) {
   state.counter++;
-  // return state;
 }
 
 export function Decrement(state, action) {
   state.counter += action.payload;
 }
+
+export const postsRequested = (state, action) => {
+  state.status = "loading";
+};
+
+export const postsRecived = (state, action) => {
+  state.status = "Sucess";
+  const loadedPost = action.payload;
+  state.students = state.students.concat(loadedPost.students);
+  // state.students.push(loadedPost.students);
+};
+
+export const postReuestFailed = (state, action) => {
+  state.status = "Failed";
+  state.error = action.error.message;
+};
+
+// export const stateSet = async (state, action) => {
+//   await fetch("https://api.hatchways.io/assessment/students").then(
+//     (response) => {
+//       if (response.ok) {
+//         response.json().then((json_response) => {
+//           state.students.push(json_response.students);
+//         });
+//       } else {
+//         state.students.push({ status: 400 });
+//       }
+//     }
+//   );
+// };
 
 // return state;
 // if (action.type === "INC") {

@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import "./partFive.css";
-// import { useSelector } from "react-redux";
 
 class partFive extends React.Component {
   constructor(props) {
@@ -14,9 +14,6 @@ class partFive extends React.Component {
     };
   }
 
-  // counter = useSelector((state) => {
-  //   console.log(state);
-  // });
   componentDidMount() {
     fetch("https://api.hatchways.io/assessment/students").then((response) => {
       let statusCopy = Object.assign({}, this.state);
@@ -207,7 +204,6 @@ class partFive extends React.Component {
     return (
       <div>
         <div>
-          {console.log(this.props)}
           {this.state.hatchwayAPI.dataLoaded ? "" : "Server Not Working"}
         </div>
         <div className="body">

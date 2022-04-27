@@ -1,16 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-// import App from "./part_five";
-import App from "./App";
+import WebBody from "./component/WebBody";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import dataStore from "./reducers";
+import dataStore from "./redux";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={dataStore}>
-      <App />
+      <WebBody />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
@@ -23,7 +22,11 @@ reportWebVitals();
 
 // import { configureStore } from "@reduxjs/toolkit";
 // import counterSlice from "./reducers";
-
+// import functionDataSore from "./App";
 // const dataStore = configureStore({
 //   reducer: counterSlice,
 // });
+
+//For Functional compoenets data store
+// import { useSelector, useDispatch } from "react-redux";
+// import { actions } from "./reducers/index";
